@@ -16,9 +16,9 @@ npm install react-native-redux-storage-middleware
 ### Integration
 Import the middleware and add it to your list of middleware to do something like this:
 
-```
+```javascript
 import { applyMiddleware, createStore } from 'redux'
-... other imports, for example for other middlewares like logActions and service middleware
+// other imports, for example for other middlewares like logActions and service middleware
 import { middleware as storageMiddleware } from 'react-native-redux-storage-middleware'
 
 const middleware = [
@@ -34,7 +34,7 @@ const store = createStore(storageReducer, applyMiddleware(...middleware))
 ### Usage examples:
 Interactions with storage are triggered through dispatched actions.
 All actions are available in the actions object.  To get that object for a given module, do something like
-```
+```javascript
 import { actions as storageActions } from 'react-native-redux-storage-middleware'
 ```
 
