@@ -8,7 +8,28 @@ react-native-redux-storage-middleware encodes **a simple pattern for connecting 
 This package encodes that simple pattern for React Native apps.  A sister package will encode the same pattern for ReactJS.
 
 ## How do I use it?
+### Usage examples:
+Interactions with storage are triggered through dispatched actions.
+All actions are available in the actions object.  To get that object for a given module, do something like
+```javascript
+import { actions as storageActions } from 'react-native-redux-storage-middleware'
+```
 
+#### setItem, getItem, getAllKeys, removeItem
+```javascript
+store.dispatch(storageActions.setItem('token', 'aweoij'))} />
+```
+```javascript
+store.dispatch(storageActions.getItem('token'))} />
+```
+```javascript
+store.dispatch(storageActions.getAllKeys())} />
+```
+```javascript
+store.dispatch(storageActions.removeItem('token'))} />
+```
+
+## Sold!  How do I install and configure it?
 ### Installation
 
 ```
@@ -32,17 +53,4 @@ const store = createStore(storageReducer, applyMiddleware(...middleware))
 
 ```
 
-### Usage examples:
-Interactions with storage are triggered through dispatched actions.
-All actions are available in the actions object.  To get that object for a given module, do something like
-```javascript
-import { actions as storageActions } from 'react-native-redux-storage-middleware'
-```
 
-#### setItem, getItem, getAllKeys, removeItem
-```
-<Button title='set' onPress={() =>   store.dispatch(storageActions.setItem('token', 'aweoij'))} />
-<Button title='get' onPress={() => store.dispatch(storageActions.getItem('token'))} />
-<Button title='all' onPress={() =>  store.dispatch(storageActions.getAllKeys())} />
-<Button title='remove' onPress={() => store.dispatch(storageActions.removeItem('token'))} />
-```
