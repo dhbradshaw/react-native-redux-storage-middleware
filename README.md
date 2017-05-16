@@ -1,67 +1,47 @@
-# Minumum Viable ES6 NPM Package
+# react-native-redux-storage-middleware
 
-## Why create minimum viable es6 npm package repo?
-A minimum viable npm **es5** package is very simple -- just create a package.json with a name and a version in a folder and upload.
+https://github.com/dhbradshaw/react-native-redux-storage-middleware
 
-However, if you want to write in **es6**, then you probably want to still publish in es5.  This adds a little complexity.
+## Why does this package exist?
 
-This package has a few parts put in place to make that work.
+I wanted a simple pattern to follow for connecting local storage to the redux global state.  This package encodes that simple pattern for React Native apps.
 
-1. The source files are placed in a `src` folder.
-2. .babelrc and package.json are set up so that a build command will populate the `build` folder.
-3. main is declared to be `index.js` in the build folder.
-4. tests are in the `tests` folder
-5. jest is added as a dev-dependancy and a test script is provided
-6. .gitignore avoids committing the generated es5 so that github isn't polluted with generated code.
-7. .npmignore avoids adding the source code so that npm isn't polluted with es6 code.
+## How do I use it?
 
-## Cool.  So what do I do to use it?
+### Installation
 
-It's pretty easy.  Here are the steps.
-
-### 1. Clone this repo
 ```
-$ git clone git@github.com:dhbradshaw/minimal-es6-npm-package.git
+npm install react-native-redux-storage-middleware
 ```
-### 2. Customize package.json
-You'll have to update the package name.
-You may will want to update at least some of several other fields: author, license, etc.  
-And of course you'll probably want to configure your dependencies and dev dependencies.
+### Integration
+Import the middleware and add it to your list of middleware to do something like this:
 
-### 3. Add your code to src
-Make sure that you export any part of your api that you want will available in the end product.
+```
+import { applyMiddleware, createStore } from 'redux'
+... other imports, for example for other middlewares like logActions and service middleware
+import { middleware as storageMiddleware } from 'react-native-redux-storage-middleware'
 
-### 4. Add your tests to `tests` and run them
-Make sure to run your tests before deploying your package.
+const middleware = [
+  logActions,
+  services,
+  storageMiddleware,
+]
 
-### Run babel to populate the build directory
-```
-yarn babel
-```
-or 
-```
-npm run babel
-```
-### Register with npm if necessary
-You can register with npm by using the add user command if you're not already there:
-```
-$ npm adduser
+const store = createStore(storageReducer, applyMiddleware(...middleware))
+
 ```
 
-### Publish!
-From the same directly as your package.json, run
+### Usage examples:
+Interactions with storage are triggered through dispatched actions.
+All actions are available in the actions object.  To get that object for a given module, do something like
 ```
-npm publish
-```
-Or, if it's a scoped package that you want to ensure is public,
-```
-npm publish --access=public
+import { actions as storageActions } from 'react-native-redux-storage-middleware'
 ```
 
-## Resources:
-
-https://docs.npmjs.com/getting-started/publishing-npm-packages
-
-https://docs.npmjs.com/getting-started/scoped-packages
-
-http://stackoverflow.com/questions/29738381/how-to-publish-a-module-written-in-es6-to-npm
+#### setItem, getItem, getAllKeys, removeItem
+```
+<Button title='set' onPress={() =>   store.dispatch(storageActions.setItem('token', 'aweoij'))} />
+<Button title='get' onPress={() => store.dispatch(storageActions.getItem('token'))} />
+<Button title='all' onPress={() =>  store.dispatch(storageActions.getAllKeys())} />
+<Button title='remove' onPress={() => store.dispatch(storageActions.removeItem('token'))} />
+```
