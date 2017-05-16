@@ -17,16 +17,19 @@ import { actions as storageActions } from 'react-native-redux-storage-middleware
 
 #### setItem, getItem, getAllKeys, removeItem
 ```javascript
-store.dispatch(storageActions.setItem('token', 'aweoij'))} />
+store.dispatch(storageActions.setItem(key, value))} />
 ```
+#### getItem
 ```javascript
-store.dispatch(storageActions.getItem('token'))} />
+store.dispatch(storageActions.getItem(key))} />
 ```
+#### getAllKeys
 ```javascript
 store.dispatch(storageActions.getAllKeys())} />
 ```
+#### removeItem
 ```javascript
-store.dispatch(storageActions.removeItem('token'))} />
+store.dispatch(storageActions.removeItem(key))} />
 ```
 
 ## Sold!  How do I install and configure it?
