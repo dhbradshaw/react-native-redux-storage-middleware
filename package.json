@@ -1,6 +1,6 @@
 {
   "name": "react-native-redux-storage-middleware",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
@@ -22,7 +22,7 @@
     "react-native": "^0.43.x"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/dhbradshaw/react-native-redux-storage-middleware.git"
+    "type": "git",
+    "url": "https://github.com/dhbradshaw/react-native-redux-storage-middleware.git"
   }
 }
