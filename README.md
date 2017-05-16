@@ -8,9 +8,10 @@ react-native-redux-storage-middleware encodes **a simple pattern for connecting 
 This package encodes that simple pattern for React Native apps.  A sister package will encode the same pattern for ReactJS.
 
 ## How do I use it?
-### Usage examples:
+### Overview
 Interactions with storage are triggered through dispatched actions.
-All actions are available in the actions object.  To get that object for a given module, do something like
+All actions are available in the actions object. Import it and use its properties to interact with AsyncStorage. 
+### Examples:
 ```javascript
 import { actions as storageActions } from 'react-native-redux-storage-middleware'
 ```
@@ -31,7 +32,42 @@ store.dispatch(storageActions.getAllKeys())} />
 ```javascript
 store.dispatch(storageActions.removeItem(key))} />
 ```
+### Use the results
+Each one of the four command actions will trigger one of two result actions.
 
+SET_ITEM => SET_ITEM_FAILED or SET_ITEM_SUCCEEDED
+GET_ITEM => GET_ITEM_FAILED or GET_ITEM_SUCCEEDED
+GET_ALL_KEYS => GET_ALL_KEYS_FAILED or GET_ALL_KEYS_SUCCEEDED
+REMOVE_ITEM => REMOVE_ITEM_FAILED or REMOVE_ITEM_SUCCEEDED
+
+All failed actions include a reason property.
+All succeeded actions include any relavant information.
+
+Here's code from the example reducer in this package as an example.
+```javascript
+const reducer = (state = {}, action) => {
+  switch (action.type) {
+    case types.GET_ITEM_SUCCEEDED: {
+      const key = action.key
+      const value = action.value
+      const modifiedState = {...state}
+      if (value !== null) {
+        modifiedState[key] = value
+      }
+      return modifiedState
+    }
+    case types.SET_ITEM: {
+      const key = action.key
+      const value = action.value
+      const modifiedState = {...state}
+      modifiedState[key] = value
+      return modifiedState
+    }
+    default:
+      return state
+  }
+}
+```
 ## Sold!  How do I install and configure it?
 ### Installation
 
