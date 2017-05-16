@@ -164,7 +164,7 @@ const reducer = (state = {}, action) => {
     case types.GET_ITEM_SUCCEEDED: {
       const key = action.key
       const value = action.value
-      modifiedState = {...state}
+      const modifiedState = {...state}
       if (value !== null) {
         modifiedState[key] = value
       }
@@ -173,7 +173,7 @@ const reducer = (state = {}, action) => {
     case types.SET_ITEM: {
       const key = action.key
       const value = action.value
-      modifiedState = {...state}
+      const modifiedState = {...state}
       modifiedState[key] = value
       return modifiedState
     }
