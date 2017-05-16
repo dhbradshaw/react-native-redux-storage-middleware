@@ -2,9 +2,9 @@
 
 https://github.com/dhbradshaw/react-native-redux-storage-middleware
 
-## Why does this package exist?
+## Why: Have and follow a simple pattern for connecting local storage to the redux global state.
 
-I wanted a simple pattern to follow for connecting local storage to the redux global state.  This package encodes that simple pattern for React Native apps.
+This package encodes that simple pattern for React Native apps.  A sister package will encode the same pattern for ReactJS.
 
 ## How do I use it?
 
