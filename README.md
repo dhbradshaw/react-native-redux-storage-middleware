@@ -15,19 +15,19 @@ All actions are available in the actions object.  To get that object for a given
 import { actions as storageActions } from 'react-native-redux-storage-middleware'
 ```
 
-#### setItem, getItem, getAllKeys, removeItem
+
 ```javascript
 store.dispatch(storageActions.setItem(key, value))} />
 ```
-#### getItem
+
 ```javascript
 store.dispatch(storageActions.getItem(key))} />
 ```
-#### getAllKeys
+
 ```javascript
 store.dispatch(storageActions.getAllKeys())} />
 ```
-#### removeItem
+
 ```javascript
 store.dispatch(storageActions.removeItem(key))} />
 ```
