@@ -43,7 +43,7 @@ REMOVE_ITEM => REMOVE_ITEM_FAILED or REMOVE_ITEM_SUCCEEDED
 All failed actions include a reason property.
 All succeeded actions include any relavant information.
 
-Here's code from the example reducer in this package as an example.
+Here's code from the example reducer in this package as an example of how to use these triggered events to update state.
 ```javascript
 const reducer = (state = {}, action) => {
   switch (action.type) {
