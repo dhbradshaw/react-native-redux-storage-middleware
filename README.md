@@ -3,7 +3,7 @@
 https://github.com/dhbradshaw/react-native-redux-storage-middleware
 
 ## What is it?
-react-native-redux-storage-middleware encodes a simple pattern for connecting local storage to the redux global state.
+react-native-redux-storage-middleware encodes **a simple pattern for connecting local storage to the redux global state.**
 
 This package encodes that simple pattern for React Native apps.  A sister package will encode the same pattern for ReactJS.
 
