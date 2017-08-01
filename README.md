@@ -35,10 +35,10 @@ store.dispatch(storageActions.removeItem(key))} />
 ### Use the results
 Each one of the four command actions will trigger one of two result actions.
 
-SET_ITEM => SET_ITEM_FAILED or SET_ITEM_SUCCEEDED
-GET_ITEM => GET_ITEM_FAILED or GET_ITEM_SUCCEEDED
-GET_ALL_KEYS => GET_ALL_KEYS_FAILED or GET_ALL_KEYS_SUCCEEDED
-REMOVE_ITEM => REMOVE_ITEM_FAILED or REMOVE_ITEM_SUCCEEDED
+    SET_ITEM => SET_ITEM_FAILED or SET_ITEM_SUCCEEDED
+    GET_ITEM => GET_ITEM_FAILED or GET_ITEM_SUCCEEDED
+    GET_ALL_KEYS => GET_ALL_KEYS_FAILED or GET_ALL_KEYS_SUCCEEDED
+    REMOVE_ITEM => REMOVE_ITEM_FAILED or REMOVE_ITEM_SUCCEEDED
 
 All failed actions include a reason property.
 All succeeded actions include any relavant information.
