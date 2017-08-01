@@ -18,19 +18,19 @@ import { actions as storageActions } from 'react-native-redux-storage-middleware
 
 
 ```javascript
-store.dispatch(storageActions.setItem(key, value))} />
+store.dispatch(storageActions.setItem(key, value))}
 ```
 
 ```javascript
-store.dispatch(storageActions.getItem(key))} />
+store.dispatch(storageActions.getItem(key))}
 ```
 
 ```javascript
-store.dispatch(storageActions.getAllKeys())} />
+store.dispatch(storageActions.getAllKeys())}
 ```
 
 ```javascript
-store.dispatch(storageActions.removeItem(key))} />
+store.dispatch(storageActions.removeItem(key))}
 ```
 ### Use the results
 Each one of the four command actions will trigger one of two result actions.
