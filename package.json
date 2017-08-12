@@ -19,7 +19,7 @@
   "author": "Douglas H. Bradshaw <dhbradshaw@gmail.com> (https://www.dougbradshaw.com)",
   "license": "MIT",
   "peerDependencies": {
-    "react-native": "^0.43.x"
+    "react-native": "^0.x.x"
   },
   "repository": {
     "type": "git",
