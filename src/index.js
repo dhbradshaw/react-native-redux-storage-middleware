@@ -1,6 +1,10 @@
 import { AsyncStorage } from 'react-native'
 
 const action_names = [
+  'CLEAR_ALL',
+  'CLEAR_ALL_SUCCEEDED',
+  'CLEAR_ALL_FAILED',
+
   'GET_ALL_KEYS',
   'GET_ALL_KEYS_FAILED',
   'GET_ALL_KEYS_SUCCEEDED',
@@ -18,15 +22,23 @@ const action_names = [
   'SET_ITEM_SUCCEEDED',
 ]
 
-const types = action_names.reduce(
-  (obj, name) => {
-    obj[name] = name
-    return obj
-  },
-  {}
-)
+const types = action_names.reduce((obj, name) => {
+  obj[name] = name
+  return obj
+}, {})
 
 const actions = {
+  clearAll: () => ({
+    type: types.CLEAR_ALL,
+  }),
+  clearAllSucceeded: () => ({
+    type: types.CLEAR_ALL_SUCCEEDED,
+  }),
+  clearAllFailed: reason => ({
+    type: types.CLEAR_ALL_FAILED,
+    reason,
+  }),
+
   getAllKeys: () => ({
     type: types.GET_ALL_KEYS,
   }),
@@ -86,72 +98,46 @@ const actions = {
   }),
 }
 
-const middleware = store => next => (action) => {
+const middleware = store => next => action => {
   next(action) // Pass all actions through.
   switch (action.type) {
+    case types.CLEAR_ALL: {
+      AsyncStorage.clear().then(
+        () => store.dispatch(actions.clearAllSucceeded()),
+        errorReason => store.dispatch(actions.clearAllFailed(errorReason)),
+      )
+    }
     case types.GET_ALL_KEYS: {
       AsyncStorage.getAllKeys().then(
-        keys => store.dispatch(
-          actions.getAllKeysSucceeded(
-            keys
-          )
-        ),
-        errorReason => store.dispatch(
-          actions.getAllKeysFailed(
-            errorReason
-          )
-        )
+        keys => store.dispatch(actions.getAllKeysSucceeded(keys)),
+        errorReason => store.dispatch(actions.getAllKeysFailed(errorReason)),
       )
       break
     }
     case types.GET_ITEM: {
       AsyncStorage.getItem(action.key).then(
-        value => store.dispatch(
-          actions.getItemSucceeded(
-            action.key,
-            value
-          )
-        ),
-        errorReason => store.dispatch(
-          actions.getItemFailed(
-            action.key,
-            errorReason
-          )
-        )
+        value => store.dispatch(actions.getItemSucceeded(action.key, value)),
+        errorReason =>
+          store.dispatch(actions.getItemFailed(action.key, errorReason)),
       )
       break
     }
     case types.REMOVE_ITEM: {
       AsyncStorage.removeItem(action.key).then(
-        value => store.dispatch(
-          actions.removeItemSucceeded(
-            action.key,
-          )
-        ),
-        errorReason => store.dispatch(
-          actions.removeItemFailed(
-            action.key,
-            errorReason
-          )
-        )
+        value => store.dispatch(actions.removeItemSucceeded(action.key)),
+        errorReason =>
+          store.dispatch(actions.removeItemFailed(action.key, errorReason)),
       )
       break
     }
     case types.SET_ITEM: {
       AsyncStorage.setItem(action.key, action.value).then(
-        value => store.dispatch(
-          actions.setItemSucceeded(
-            action.key,
-            action.value
-          )
-        ),
-        errorReason => store.dispatch(
-          actions.setItemFailed(
-            action.key,
-            action.value,
-            errorReason
-          )
-        )
+        value =>
+          store.dispatch(actions.setItemSucceeded(action.key, action.value)),
+        errorReason =>
+          store.dispatch(
+            actions.setItemFailed(action.key, action.value, errorReason),
+          ),
       )
     }
     default:
@@ -164,7 +150,7 @@ const reducer = (state = {}, action) => {
     case types.GET_ITEM_SUCCEEDED: {
       const key = action.key
       const value = action.value
-      const modifiedState = {...state}
+      const modifiedState = { ...state }
       if (value !== null) {
         modifiedState[key] = value
       }
@@ -173,7 +159,7 @@ const reducer = (state = {}, action) => {
     case types.SET_ITEM: {
       const key = action.key
       const value = action.value
-      const modifiedState = {...state}
+      const modifiedState = { ...state }
       modifiedState[key] = value
       return modifiedState
     }
@@ -182,11 +168,4 @@ const reducer = (state = {}, action) => {
   }
 }
 
-
-
-export {
-  actions,
-  middleware,
-  reducer,
-  types,
-}
+export { actions, middleware, reducer, types }
