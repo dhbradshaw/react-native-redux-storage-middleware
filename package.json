@@ -1,6 +1,6 @@
 {
   "name": "react-native-redux-storage-middleware",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
@@ -10,7 +10,7 @@
     "jest": "^20.0.0",
     "react-scripts": "0.9.5"
   },
-  "description": "utilities for working with a list of objects",
+  "description": "A redux oriented wrapper around React Native's AsyncStorage",
   "main": "lib/index.js",
   "scripts": {
     "babel": "babel src/index.js -o lib/index.js",
